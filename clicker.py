@@ -634,3 +634,31 @@ async def handler(event):
     )
 
 client.run_until_disconnected()
+# Import Flask
+from flask import Flask, request, jsonify
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Flask endpoint for controlling the bot
+@app.route('/control_bot', methods=['POST'])
+def control_bot():
+    data = request.json
+    action = data.get('action')
+
+    # Example actions: start, stop, restart, etc.
+    if action == 'start':
+        # Code to start the bot
+        return jsonify({'status': 'success', 'message': 'Bot started successfully'})
+    elif action == 'stop':
+        # Code to stop the bot
+        return jsonify({'status': 'success', 'message': 'Bot stopped successfully'})
+    elif action == 'restart':
+        # Code to restart the bot
+        return jsonify({'status': 'success', 'message': 'Bot restarted successfully'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid action'})
+
+# Run the Flask app
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
